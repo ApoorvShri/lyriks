@@ -18,7 +18,7 @@ const Discover = () => {
 
   if (isFetching) return <Loader title="Loading songs ..." />;
 
-  if (error) return <Error />;
+  if (error) { console.log(error); return <Error />;}
 
   const genreTitle = genres.find(({ value }) => value === genreListId)?.title;
 

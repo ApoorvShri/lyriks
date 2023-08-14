@@ -21,7 +21,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
       <div className="relative w-full h-56 group">
         <div
           className={`absolute inset-0 justify-center items-center bg-black bg-opacity-50 group-hover:flex ${
-            activeSong?.title === song.title
+            activeSong?.title === (song.title || song.heading?.title)
               ? "flex bg-black bg-opacity-70"
               : "hidden"
           }`}
@@ -35,12 +35,17 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
           />
         </div>
 
-        <img src={song.images?.coverart} alt="song_img" />
+        <img
+          src={song.images?.coverart || song.images?.default}
+          alt="song_img"
+        />
       </div>
 
       <div className="mt-4 flex flex-col">
         <p className="font-semibold text-lg text-white truncate">
-          <Link to={`/songs/${song?.key}`}>{song.title}</Link>
+          <Link to={`/songs/${song?.key}`}>
+            {song.title || song.heading?.title}
+          </Link>
         </p>
 
         <p className="text-sm truncate text-gray-300 mt-1">
@@ -51,7 +56,7 @@ const SongCard = ({ song, isPlaying, activeSong, data, i }) => {
                 : "/top-artists"
             }
           >
-            {song.subtitle}
+            {song.subtitle || song.heading?.subtitle}
           </Link>
         </p>
       </div>
